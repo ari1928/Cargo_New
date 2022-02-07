@@ -100,8 +100,8 @@ $company = mysql_fetch_array(mysql_query("SELECT * FROM company"));
 													</div>
 													<div class="col-sm-4 form-group">
 
-														<label class="control-label">SHIPPER <span class="required-field">*</span></label>
-														<select name="Shippername" class="form-control" id="">
+														<label class="text-success">SHIPPER <span class="required-field">*</span></label>
+														<select name="Shippername" class="form-control" id="" required>
 															<option value="">-- Pilih --</option>
 															<?php
 															$sql = mysql_query("SELECT * FROM tbl_clients");
@@ -115,59 +115,22 @@ $company = mysql_fetch_array(mysql_query("SELECT * FROM company"));
 
 														<!-- Name -->
 														<div class="form-group">
-															<label class="control-label">CONSIGNEE<span class="required-field">*</span></label>
-															<input type="text" class="form-control" name="Receivername" placeholder="Masukkan Nama Penerima / Consignee">
+															<label class="text-success">CONSIGNEE<span class="required-field">*</span></label>
+															<input type="text" class="form-control" name="Receivername" placeholder="Masukkan Nama Penerima / Consignee" required>
 
 														</div>
 
 													</div>
 												</div>
 
-												<div class="row" hidden>
-													<div class="col-sm-6 form-group">
-														<label class="control-label">ALAMAT<span class="required-field">*</span></label>
-														<input type="text" name="Shipperaddress" id="Shipperaddress" class="form-control" autocomplete="off" required placeholder="Alamat pengirim">
-													</div>
-
-													<div class="col-sm-3 form-group">
-														<label class="control-label"><i class="fa fa-phone icon text-default-lter"></i>&nbsp;PHONE</label>
-														<input type="text" class="form-control" name="Shipperphone" id="Shipperphone" autocomplete="off" required placeholder="Nomor handphone pengirim">
-													</div>
-
-													<div class="col-sm-3 form-group">
-														<label class="control-label">ID</i></label>
-														<input type="text" name="Shippercc" id="Shippercc" class="form-control" maxlength="20" placeholder="ID phone Pengirim" autocomplete=" off" required>
-													</div>
-												</div>
-
-												<!-- Adress and Phone -->
-
-												<!-- START Shipment information -->
-
-												<!-- Country and state -->
 												<div class="row">
-													<div class="col-sm-5 form-group" hidden>
-														<label class="control-label"><i class="fa fa-database icon text-default-lter"></i>&nbsp;<strong>Mode pembayaran</strong></label>
-														<select name="Bookingmode" class="form-control" id="Bookingmode">
-															<option selected="selected" value="Paid">Dibayar</option>
-															<option value="ToPay">Untuk Dibayar</option>
-															<option value="Cash-on-Delivery">Cash on Delivery/COD</option>
-
-														</select>
-													</div>
-
-													<div class="col-sm-4 form-group" hidden>
-														<label class="control-label">Tipe produk</label>
-														<input name="Shiptype" class="form-control" id="Shiptype" placeholder="masukan Tipe dari Produk">
-
+													<div class="col-sm-4 form-group">
+														<label class="text-success">HBL / HAWB No <span class="required-field">*</span></label>
+														<input name="hbl" class="form-control" id="hbl" placeholder="Masukkan HBL / HAWB No" required>
 													</div>
 													<div class="col-sm-4 form-group">
-														<label class="control-label">HBL / HAWB No</label>
-														<input name="hbl" class="form-control" id="hbl" placeholder="Masukkan HBL / HAWB No">
-													</div>
-													<div class="col-sm-4 form-group">
-														<label class="control-label"><i class="fa fa-plane icon text-default-lter"></i>&nbsp;Shipment Type</label>
-														<select name="shipment_type" class="form-control" id="Mode">
+														<label class="text-success"><i class="fa fa-plane icon text-default-lter"></i>&nbsp;Shipment Type <span class="required-field">*</span></label>
+														<select name="shipment_type" class="form-control" id="Mode" required>
 															<option value="0">Pilih</option>
 															<?php
 															$sql = mysql_query("SELECT * FROM shipment_type");
@@ -178,8 +141,8 @@ $company = mysql_fetch_array(mysql_query("SELECT * FROM company"));
 														</select>
 													</div>
 													<div class="col-sm-4 form-group">
-														<label class="control-label"><i class="fa fa-plane icon text-default-lter"></i>&nbsp;Service / MODE</label>
-														<select name="Mode" class="form-control" id="Mode">
+														<label class="text-success"><i class="fa fa-plane icon text-default-lter"></i>&nbsp;MODE <span class="required-field">*</span></label>
+														<select name="Mode" class="form-control" id="Mode" required>
 															<option value="0">Pilih</option>
 															<?php
 															$sql = mysql_query("SELECT name FROM mode_bookings  GROUP BY name");
@@ -197,92 +160,59 @@ $company = mysql_fetch_array(mysql_query("SELECT * FROM company"));
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-group">
-															<label for="">POL :</label>
-															<input type="text" name="pol" class="form-control" id="" placeholder="Masukkan POL">
+															<label class="text-success">POL <span class="required-field">*</span></label>
+															<input type="text" name="pol" class="form-control" id="" placeholder="Masukkan POL" required>
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="form-group">
-															<label for="">POD :</label>
-															<input type="text" name="pod" class="form-control" id="" placeholder="Masukkan POD">
+															<label class="text-success">POD <span class="required-field">*</span></label>
+															<input type="text" name="pod" class="form-control" id="" placeholder="Masukkan POD" required>
 														</div>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-group">
-															<label for="">Transit Port :</label>
-															<input type="text" name="transit_port" class="form-control" id="" placeholder="Masukkan transit port">
+															<label class="text-success">Transit Port <span class="required-field">*</span></label>
+															<input type="text" name="transit_port" class="form-control" id="" placeholder="Masukkan transit port" required>
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="form-group">
-															<label for="">Transit Time :</label>
-															<input type="text" name="transit_time" class="form-control" id="" placeholder="Masukkan transit time">
+															<label class="text-success">Transit Time <span class="required-field">*</span></label>
+															<input type="text" name="transit_time" class="form-control" id="" placeholder="Masukkan transit time" required>
 														</div>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-group">
-															<label for="">Vessel Voyage :</label>
-															<input type="text" name="vessel_voyage" class="form-control" id="" placeholder="Masukkan vessel voyage">
+															<label class="text-success">Vessel Voyage <span class="required-field">*</span></label>
+															<input type="text" name="vessel_voyage" class="form-control" id="" placeholder="Masukkan vessel voyage" required>
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="form-group">
-															<label for="">Connecting Vessel :</label>
-															<input type="text" name="connecting_vessel" class="form-control" id="" placeholder="Masukkan connecting vessel">
+															<label class="text-success">Connecting Vessel <span class="required-field">*</span></label>
+															<input type="text" name="connecting_vessel" class="form-control" id="" placeholder="Masukkan connecting vessel" required>
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="form-group">
-															<label for="">Container Seal :</label>
-															<input type="text" name="container_seal" class="form-control" id="" placeholder="Masukkan masukkan container seal">
+															<label class="text-success">Container Seal <span class="required-field">*</span></label>
+															<input type="text" name="container_seal" class="form-control" id="" placeholder="Masukkan masukkan container seal" required>
 														</div>
 													</div>
 												</div>
-												<!-- Qnty -->
-												<div class="row">
-
-													<!-- Origin Office -->
-
-													<div class="col-sm-4 form-group" hidden>
-														<label for="ccv" class="control-label"><?php echo $company['currency']; ?>&nbsp;Asuransi Pengiriman</i></label>
-														<input name="Totaldeclarate" value="0" class="form-control" id="Totaldeclarate" maxlength="20" placeholder="0,00" />
-													</div>
-													<div class="col-sm-4 form-group">
-														<label for="zipcode" class="control-label"><i class="fa fa-angle-double-right icon text-default-lter"></i>&nbsp;KANTOR ASAL</label>
-														<select name="Invoiceno" id="Invoiceno" class="form-control">
-															<?php
-															while ($data = dbFetchAssoc($result)) {
-															?>
-																<option value="<?php echo $data['off_name']; ?>"><?php echo $data['off_name']; ?></option>
-															<?php
-															} //while
-															?>
-														</select>
-													</div>
-													<!-- Destination Office -->
-													<div class="col-sm-4 form-group">
-														<label for="zipcode" class="control-label"><i class="fa fa-angle-double-right icon text-default-lter"></i>&nbsp;NEGARA TUJUAN</label>
-														<span id="inter_origin" style="display: block;">
-															<select onchange="print_state('state', this.selectedIndex);" id="country" required name="Pickuptime" class="form-control"></select>
-															<script language="javascript">
-																print_country("country");
-															</script>
-													</div>
-												</div>
-
-												<!-- Payment Mode -->
 												<div class="row">
 													<div class="col-sm-4 form-group">
-														<label class="text-success"><i class="fa fa-cubes icon text-default-lter"></i>&nbsp;BANYAKNYA / QTY</label>
-														<input type="text" class="form-control" name="Qnty" value="0" />
+														<label class="text-success"><i class="fa fa-cubes icon text-default-lter"></i>&nbsp;Quantity <span class="required-field">*</span></label>
+														<input type="text" class="form-control" name="Qnty" placeholder="Masukkan quantity" required>
 													</div>
 													<div class="col-sm-4 form-group">
-														<label class="text-success">Berat&nbsp;&nbsp;(Kg)</label>
-														<input type="text" class="form-control" name="Weight" value="0" />
+														<label class="text-success">Berat&nbsp;&nbsp;(Kg) <span class="required-field">*</span></label>
+														<input type="text" class="form-control" name="Weight" placeholder="Masukkan berat" required>
 													</div>
 													<div class="col-sm-2 form-group" hidden>
 														<label class="text-success"><?php echo $company['currency']; ?>&nbsp;Variable&nbsp;(Kg)</label>
@@ -299,7 +229,7 @@ $company = mysql_fetch_array(mysql_query("SELECT * FROM company"));
 												</div>
 												<!-- Text area -->
 												<div class="form-group">
-													<label for="inputTextarea" class="control-label"><i class="fa fa-comments icon text-default-lter"></i>&nbsp;Detail Pengiriman / COMMODITY</label>
+													<label for="inputTextarea" class="text-success"><i class="fa fa-comments icon text-default-lter"></i>&nbsp;COMMODITY <span class="required-field">*</span></label>
 													<textarea class="form-control" name="Comments" id="Comments" placeholder="tulis Detail tentang Pengiriman"></textarea>
 												</div>
 
@@ -308,32 +238,6 @@ $company = mysql_fetch_array(mysql_query("SELECT * FROM company"));
 
 											<!-- START Receiver info  -->
 											<fieldset class="col-md-6">
-												<legend>Data penerima :</legend>
-
-												<!-- Adress and Phone -->
-												<div class="row" hidden>
-													<div class="col-sm-6 form-group">
-														<label class="control-label">ALAMAT <span class="required-field">*</span></label>
-														<input type="text" name="Receiveraddress" id="Receiveraddress" class="form-control" autocomplete="off" required placeholder="Alamat Penerima">
-													</div>
-
-													<div class="col-sm-3 form-group">
-														<label class="control-label"><i class="fa fa-phone icon text-default-lter"></i>&nbsp;PHONE</label>
-														<input type="text" class="form-control" name="Receiverphone" id="Receiverphone" autocomplete="off" required placeholder="Recipient phone">
-													</div>
-
-													<div class="col-sm-3 form-group">
-														<label class="control-label">ID</i></label>
-														<input type="text" name="Receivercc_r" id="Receivercc_r" class="form-control" maxlength="20" placeholder="Recipient id" autocomplete="off" required>
-													</div>
-													<div class="col-sm-12 form-group">
-														<label class="control-label">EMAIL <font color="#FF6100">Note: (Email harus benar untuk pemberitahuan pengiriman)</font></i></label>
-														<input type="text" name="Receiveremail" id="Receiveremail" class="form-control" placeholder="robialakbar@gmail.com" autocomplete=" off" required>
-													</div>
-												</div>
-
-												<br>
-												<br>
 
 												<!-- Name -->
 												<div class="form-group">
@@ -360,32 +264,36 @@ $company = mysql_fetch_array(mysql_query("SELECT * FROM company"));
 												</div>
 
 
-												<!-- Status and Pickup Date -->
-												<div class="form-group">
-													<label for="dtp_input1" class="control-label"><i class="fa fa-calendar icon text-default-lter"></i>&nbsp;ETA POD</i></label>
-													<div>
-														<div class="input-group">
-															<input type="text" class="form-control" name="Packupdate" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
-															<span class="input-group-addon bg-custom b-0"><i class="icon-calender"></i></span>
-														</div><!-- input-group -->
-													</div>
-												</div>
 
 												<div class="row">
-													<div class="col-sm-4 form-group">
-														<label for="month" class="control-label"><i class="fa fa-sort-amount-asc icon text-default-lter"></i>&nbsp;STATUS</label>
+													<div class="col-sm-12 form-group">
+														<label for="month" class="text-success"><i class="fa fa-sort-amount-asc icon text-default-lter"></i>&nbsp;STATUS</label>
 														<select class="form-control" name="status" id="status">
 															<option selected="selected" value="In-Transit">In Transit</option>
 														</select>
 													</div>
-													<div class="col-sm-8 form-group">
-														<label for="dtp_input1" class="control-label"><i class="fa fa-calendar icon text-default-lter"></i>&nbsp;Jadwalkan pengiriman / ETD POL</i></label>
+													<div class="col-md-6">
+														<!-- Status and Pickup Date -->
+														<div class="form-group">
+															<label for="dtp_input1" class="text-success"><i class="fa fa-calendar icon text-default-lter"></i>&nbsp;ETA POD</i> <span class="required-field">*</span></label>
+															<div>
+																<div class="input-group">
+																	<input type="text" class="form-control" name="Packupdate" placeholder="mm/dd/yyyy" id="datepicker-autoclose">
+																	<span class="input-group-addon bg-custom b-0"><i class="icon-calender"></i></span>
+																</div><!-- input-group -->
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 form-group">
+														<label for="dtp_input1" class="text-success"><i class="fa fa-calendar icon text-default-lter"></i>&nbsp;ETD POL</i> <span class="required-field">*</span></label>
 														<div>
 															<div class="input-group">
 																<input type="text" class="form-control" name="Schedule" placeholder="mm/dd/yyyy" id="datepicker">
 																<span class="input-group-addon bg-custom b-0"><i class="icon-calender"></i></span>
 															</div><!-- input-group -->
 														</div>
+													</div>
+												</div>
 
 											</fieldset>
 											<div class="col-md-6 text-left">

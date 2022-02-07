@@ -1,275 +1,338 @@
-<?php 
+<?php
 
- 
+
 session_start();
 require_once('database.php');
-	
+
 $action = $_GET['action'];
 
-switch($action) {
+switch ($action) {
 	case 'add-cons':
 		addCons();
-	break;
-	
+		break;
+
 	case 'approve-courier':
-	
-	approveCourier();
-	
-	break;
-	
-	 case 'update-booking':	
-	updateBooking();	
-	break;
-	
+
+		approveCourier();
+
+		break;
+
+	case 'update-booking':
+		updateBooking();
+		break;
+
 	case 'add-customer':
 		addCustomer();
-	break;
-	
+		break;
+
 	case 'add-client':
 		addclient();
-	break;
-	
+		break;
+
 	case 'shipping-charges':
 		shippingcharges();
-	break;
-	
+		break;
+
 	case 'update-admin':
 		updateadmin();
-	break;
-	
+		break;
+
 	case 'update-courier':
 		updatecourier();
-	break;
-	
+		break;
+
 	case 'update-addcourier':
 		addcourier_update();
-	break;
+		break;
 
 	case 'change-profile':
 		changeProfile();
-	break;
+		break;
 
 	case 'change-pass':
 		changePass();
-	break;
-	
+		break;
+
 	case 'company':
 		changeCompany();
-	break;
-	
+		break;
+
 	case 'change-logo':
 		changelogo();
-	break;
-	
+		break;
+
 	case 'send-msg':
 		sendMsg();
-	break;
+		break;
 
 	case 'edit-user':
 		edituser();
-	break;
-	
+		break;
+
 	case 'update-client':
 		updateclient();
-	break;
+		break;
 
 	case 'delivered':
 		markDelivered();
-	break;
-	
+		break;
+
 	case 'deliveredcredit':
 		markDeliveredcredit();
-	break;	
-	
+		break;
+
 	case 'deliveredondelivery':
 		Deliveredondelivery();
-	break;
-	
+		break;
+
 	case 'add-office':
 		addNewOffice();
-	break;
-	
+		break;
+
 	case 'add-customer':
 		addNewCustomer();
-	break;
-	
+		break;
+
 	case 'add-manager':
 		addManager();
-	break;
-	
+		break;
+
 	case 'add-managers':
 		addManagers();
-	break;
-	
+		break;
+
 	case 'update-status':
 		updateStatus();
-	break;
-	
+		break;
+
 	case 'update-paid':
 		updatePaid();
-	break;
-	
+		break;
+
 	case 'change-pass':
 		changePass();
-	break;
-			
+		break;
+
 	case 'logOut':
 		logOut();
-	break;		
-	
-}//switch
+		break;
+} //switch
 
-function addCons(){
+function addCons()
+{
 
 	$Shippername = $_POST['Shippername'];
-	$Shipperphone = $_POST['Shipperphone'];
-	$Shipperaddress = $_POST['Shipperaddress'];
-	$Shippercc = $_POST['Shippercc'];
-	
+	$Shipperphone = '';
+	$Shipperaddress = '';
+	$Shippercc = '';
+
 	$Receivername = $_POST['Receivername'];
-	$Receiverphone = $_POST['Receiverphone'];
-	$Receiveraddress = $_POST['Receiveraddress'];
-	$Receivercc_r = $_POST['Receivercc_r'];
-	$Receiveremail = $_POST['Receiveremail'];
-	
+	$Receiverphone = '';
+	$Receiveraddress = '';
+	$Receivercc_r = '';
+	$Receiveremail = '';
+
 	$ConsignmentNo = $_POST['ConsignmentNo'];
-	$Shiptype = $_POST['Shiptype'];
+	$Shiptype = '';
 	$Weight = $_POST['Weight'];
 	$variable = $_POST['variable'];
 	$shipping_subtotal = $_POST['shipping_subtotal'];
-	$Invoiceno = $_POST['Invoiceno'];
+	$Invoiceno = '';
 	$Qnty = $_POST['Qnty'];
 
-	$Bookingmode = $_POST['Bookingmode'];
+	$Bookingmode = '';
 	$Totalfreight = $_POST['Totalfreight'];
-	$Totaldeclarate = $_POST['Totaldeclarate'];
+	$Totaldeclarate = '0';
 	$Mode = $_POST['Mode'];
-	
+
 	$Packupdate = $_POST['Packupdate'];
 	$Schedule = $_POST['Schedule'];
-	$Pickuptime = $_POST['Pickuptime'];
+	$Pickuptime = '';
 	$status = $_POST['status'];
 	$Comments = $_POST['Comments'];
 	$officename = $_POST['officename'];
-	$user = $_POST['user'];	
+	$user = $_POST['user'];
+	$hbl = $_POST['hbl'];
+	$shipment_type = $_POST['shipment_type'];
+	$pol = $_POST['pol'];
+	$transit_port = $_POST['transit_port'];
+	$transit_time = $_POST['transit_time'];
+	$pod = $_POST['pod'];
+	$vessel_voyage = $_POST['vessel_voyage'];
+	$connecting_vessel = $_POST['connecting_vessel'];
+	$container_seal = $_POST['container_seal'];
 
-	$sql = "INSERT INTO courier (cons_no, ship_name, phone, s_add, cc, rev_name, r_phone, r_add, cc_r, email, type, weight, variable, shipping_subtotal, invice_no, qty, book_mode, freight, declarate, mode, pick_date, schedule, pick_time, status, comments,book_date,status_delivered, officename, user)
-			VALUES('$ConsignmentNo', '$Shippername','$Shipperphone', '$Shipperaddress', '$Shippercc', '$Receivername','$Receiverphone','$Receiveraddress', '$Receivercc_r', '$Receiveremail', '$Shiptype',$Weight , '$variable', '$shipping_subtotal', '$Invoiceno', $Qnty, '$Bookingmode', '$Totalfreight',  '$Totaldeclarate', '$Mode', '$Packupdate', '$Schedule', '$Pickuptime', '$status', '$Comments', curdate(),'OTW', '$officename', '$user')";	
-		//echo $sql;
+	$sql = "INSERT INTO courier (cons_no, ship_name, phone, s_add, cc, rev_name, r_phone, r_add, cc_r, email, type, weight, variable, shipping_subtotal, invice_no, qty, book_mode, freight, declarate, mode, pick_date, schedule, pick_time, status, comments,book_date,status_delivered, officename, user,
+	hbl,shipment_type,pol,transit_port,transit_time,pod,vessel_voyage,connecting_vessel,container_seal)
+			VALUES('$ConsignmentNo', '$Shippername','$Shipperphone', '$Shipperaddress', '$Shippercc', '$Receivername','$Receiverphone','$Receiveraddress', '$Receivercc_r', '$Receiveremail', '$Shiptype','$Weight' , '$variable', '$shipping_subtotal', '$Invoiceno', $Qnty, '$Bookingmode', '$Totalfreight',  '$Totaldeclarate', '$Mode', '$Packupdate', '$Schedule', '$Pickuptime', '$status', '$Comments', curdate(),'OTW', '$officename',
+			 '$user',
+			 '$hbl',
+			 '$shipment_type',
+			 '$pol',
+			 '$transit_port',
+			 '$transit_time',
+			 '$pod',
+			 '$vessel_voyage',
+			 '$connecting_vessel',
+			 '$container_seal')";
+	//echo $sql;
 	dbQuery($sql);
-					
-					
+
+
 	$result1 =  mysql_query("SELECT * FROM company");
-	while($row = mysql_fetch_array($result1)) {
-	
-	$to  = $row["bemail"];
-	$address  = $row["caddress"];
-	$namecompany  = $row["cname"];
+	while ($row = mysql_fetch_array($result1)) {
 
-    // subject
+		$to  = $row["bemail"];
+		$address  = $row["caddress"];
+		$namecompany  = $row["cname"];
 
-    $subject = 'SHIPPING SENT YOUR DESTINATION | '.$row["cname"].'';
-	$from = $row["bemail"];
-    // message
-	$text_message    = "Hi ".$Receivername." this is our address, <br /><br /> <strong> ".$address." Please consider your environmental responsibility. Before printing this e-mail message, ask yourself whether you really need a hard copy.</strong><br /><br /> IMPORTANT:</strong> The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.";			   	
-	
-	// HTML email starts here
-	
-	$message  = "<html><body>";	
-	$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";	
-	$message .= "<tr><td>";	
-	$message .= "<table align='center' width='100%' border='0' cellpadding='0' cellspacing='0' style='max-width:800px; background-color:#fff; font-family:Verdana, Geneva, sans-serif;'>";		
-	$message .= "<thead>
+		// subject
+
+		$subject = 'SHIPPING SENT YOUR DESTINATION | ' . $row["cname"] . '';
+		$from = $row["bemail"];
+		// message
+		$text_message    = "Hi " . $Receivername . " this is our address, <br /><br /> <strong> " . $address . " Please consider your environmental responsibility. Before printing this e-mail message, ask yourself whether you really need a hard copy.</strong><br /><br /> IMPORTANT:</strong> The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.";
+
+		// HTML email starts here
+
+		$message  = "<html><body>";
+		$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";
+		$message .= "<tr><td>";
+		$message .= "<table align='center' width='100%' border='0' cellpadding='0' cellspacing='0' style='max-width:800px; background-color:#fff; font-family:Verdana, Geneva, sans-serif;'>";
+		$message .= "<thead>
 				<tr height='80'>
-					<th colspan='4' style='background-color:#f5f5f5; border-bottom:solid 1px #bdbdbd; font-family:Verdana, Geneva, sans-serif; color:#333; font-size:34px;' >".$namecompany."</th>
+					<th colspan='4' style='background-color:#f5f5f5; border-bottom:solid 1px #bdbdbd; font-family:Verdana, Geneva, sans-serif; color:#333; font-size:34px;' >" . $namecompany . "</th>
 				</tr>
 				</thead>";
-		
-	$message .= "<tbody>
+
+		$message .= "<tbody>
 				
 				<tr>
 					<td colspan='4' style='padding:15px;'>
-						<p><img src='".$row['website']."deprixa/image_logo.php?id=1'></p>
+						<p><img src='" . $row['website'] . "deprixa/image_logo.php?id=1'></p>
 						<br><br>
-						<p style='font-size:16px;'><strong>".$Receivername."</strong>, the Lord <strong>".$Shippername."</strong>, has sent you a package to your address with the following details: </p>
+						<p style='font-size:16px;'><strong>" . $Receivername . "</strong>, the Lord <strong>" . $Shippername . "</strong>, has sent you a package to your address with the following details: </p>
 						<hr />
-						<p style='font-size:14px;'>Email: <strong> ".$Receiveremail."</strong></p>					
-						<p style='font-size:14px;'>Tracking: <strong> ".$ConsignmentNo."</strong></p>
-						<p style='font-size:14px;'>Destination: <strong> ".$Pickuptime."</strong></p>
-						<p style='font-size:14px;'>Details: <strong> ".$Shiptype."</strong></p>
+						<p style='font-size:14px;'>Email: <strong> " . $Receiveremail . "</strong></p>					
+						<p style='font-size:14px;'>Tracking: <strong> " . $ConsignmentNo . "</strong></p>
+						<p style='font-size:14px;'>Destination: <strong> " . $Pickuptime . "</strong></p>
+						<p style='font-size:14px;'>Details: <strong> " . $Shiptype . "</strong></p>
 						<br><br>
-						<p style='font-size:14px;'>Tracking Details URL:<a style='background:#eee;color:#333;padding:10px;' href='".$row["website"]."tracking.php' >See shipping</a></p>
+						<p style='font-size:14px;'>Tracking Details URL:<a style='background:#eee;color:#333;padding:10px;' href='" . $row["website"] . "tracking.php' >See shipping</a></p>
 						<br>
-						<p><a style='background:#eee;color:#333;padding:10px;' href='".$row["website"]."login.php' >Customer Login</a></p>
+						<p><a style='background:#eee;color:#333;padding:10px;' href='" . $row["website"] . "login.php' >Customer Login</a></p>
 						<br><br>
-						<p style='font-size:13px; font-family:Verdana, Geneva, sans-serif;'>".$text_message.".</p>
+						<p style='font-size:13px; font-family:Verdana, Geneva, sans-serif;'>" . $text_message . ".</p>
 					</td>
 				</tr>												
-				</tbody>";				
-	$message .= "</table>";	
-	$message .= "</td></tr>";
-	$message .= "</table>";	
-	$message .= "</body></html>";
-
+				</tbody>";
+		$message .= "</table>";
+		$message .= "</td></tr>";
+		$message .= "</table>";
+		$message .= "</body></html>";
 	}
-    // To send HTML mail, the Content-type header must be set
+	// To send HTML mail, the Content-type header must be set
 
-    $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-   // Additional headers
-    $headers .= 'From: '.$from."\r\n";	
-    // this line checks that we have a valid email address
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	// Additional headers
+	$headers .= 'From: ' . $from . "\r\n";
+	// this line checks that we have a valid email address
 	mail($to, $subject, $message, $headers); //This method sends the mail.
 	mail($Receiveremail, $subject, $message, $headers); //This method sends the mail.
-   
-   echo "<script type=\"text/javascript\">
+
+	echo "<script type=\"text/javascript\">
 			alert(\"'$_POST[rev_name]' shipping satisfactory to the client, will be notified by mail.\");
 			window.location = \"add-courier.php\"
-		</script>";																			
-	
-	//echo $Ship;
-}//addCons
+		</script>";
 
-function addcourier_update(){
+	//echo $Ship;
+} //addCons
+
+function addcourier_update()
+{
 	$cid = (int)$_POST['cid'];
 	$Shippername = $_POST['Shippername'];
-	$Shipperphone = $_POST['Shipperphone'];
-	$Shipperaddress = $_POST['Shipperaddress'];
-	$Shippercc = $_POST['Shippercc'];
-	
+	$Shipperphone = '';
+	$Shipperaddress = '';
+	$Shippercc = '';
+
 	$Receivername = $_POST['Receivername'];
-	$Receiverphone = $_POST['Receiverphone'];
-	$Receiveraddress = $_POST['Receiveraddress'];
-	$Receivercc_r = $_POST['Receivercc_r'];
-	$Receiveremail = $_POST['Receiveremail'];
-	
+	$Receiverphone = '';
+	$Receiveraddress = '';
+	$Receivercc_r = '';
+	$Receiveremail = '';
+
 	$ConsignmentNo = $_POST['ConsignmentNo'];
-	$Shiptype = $_POST['Shiptype'];
+	$Shiptype = '';
 	$Weight = $_POST['Weight'];
 	$variable = $_POST['variable'];
 	$shipping_subtotal = $_POST['shipping_subtotal'];
-	$Invoiceno = $_POST['Invoiceno'];
+	$Invoiceno = '';
 	$Qnty = $_POST['Qnty'];
 
-	$Bookingmode = $_POST['Bookingmode'];
+	$Bookingmode = '';
 	$Totalfreight = $_POST['Totalfreight'];
-	$Totaldeclarate = $_POST['Totaldeclarate'];
+	$Totaldeclarate = '0';
 	$Mode = $_POST['Mode'];
-	
+
 	$Packupdate = $_POST['Packupdate'];
 	$Schedule = $_POST['Schedule'];
-	$Pickuptime = $_POST['Pickuptime'];
+	$Pickuptime = '';
 	$status = $_POST['status'];
 	$Comments = $_POST['Comments'];
 	$officename = $_POST['officename'];
-	$user = $_POST['user'];	
+	$user = $_POST['user'];
 
-	$sql = "UPDATE courier
-                       SET cons_no='$ConsignmentNo', ship_name='$Shippername',phone='$Shipperphone',s_add='$Shipperaddress', cc='$Shippercc', rev_name='$Receivername',r_phone='$Receiverphone',r_add='$Receiveraddress', cc_r='$Receivercc_r', email='$Receiveremail', type='$Shiptype', weight='$Weight', variable='$variable', invice_no='$Invoiceno',declarate='$Totaldeclarate', mode ='$Mode', pick_date='$Packupdate' , schedule='$Schedule',pick_time='$Pickuptime',book_mode='$Bookingmode',freight='$Totalfreight',
-					   qty='$Qnty', shipping_subtotal='$shipping_subtotal', status='$status', comments='$Comments', officename='$officename', user='$user'  
-                       WHERE cid = '$cid'";	
-		//echo $sql;
-	dbQuery($sql);		
+	$hbl = $_POST['hbl'];
+	$shipment_type = $_POST['shipment_type'];
+	$pol = $_POST['pol'];
+	$transit_port = $_POST['transit_port'];
+	$transit_time = $_POST['transit_time'];
+	$pod = $_POST['pod'];
+	$vessel_voyage = $_POST['vessel_voyage'];
+	$connecting_vessel = $_POST['connecting_vessel'];
+	$container_seal = $_POST['container_seal'];	
+
+	$sql = "UPDATE courier SET cons_no='$ConsignmentNo', 
+					   ship_name='$Shippername',
+					   phone='$Shipperphone',
+					   s_add='$Shipperaddress', 
+					   cc='$Shippercc', 
+					   rev_name='$Receivername',
+					   r_phone='$Receiverphone',
+					   r_add='$Receiveraddress', 
+					   cc_r='$Receivercc_r', 
+					   email='$Receiveremail', 
+					   type='$Shiptype', 
+					   weight='$Weight', 
+					   variable='$variable', 
+					   invice_no='$Invoiceno',
+					   declarate='$Totaldeclarate',
+					    mode ='$Mode', 
+						pick_date='$Packupdate' , 
+						schedule='$Schedule',
+						pick_time='$Pickuptime',
+						book_mode='$Bookingmode',
+						freight='$Totalfreight',
+					   qty='$Qnty', 
+					   shipping_subtotal='$shipping_subtotal', 
+					   status='$status',
+					   comments='$Comments', 
+					   officename='$officename', 
+					   user='$user', 
+					   hbl='$hbl', 
+					   shipment_type='$shipment_type', 
+					   pol='$pol', 
+					   transit_port='$transit_port', 
+					   transit_time='$transit_time', 
+					   pod='$pod', 
+					   vessel_voyage='$vessel_voyage', 
+					   connecting_vessel='$connecting_vessel', 
+					   container_seal='$container_seal'  
+                       WHERE cid = '$cid'";
+	//echo $sql;
+	dbQuery($sql);
 
 	echo "<script type=\"text/javascript\">
 						alert(\"Updates applied successfuly.\");
@@ -277,12 +340,13 @@ function addcourier_update(){
 					</script>";
 
 	//echo $Ship;
-}//addcourier_update
+} //addcourier_update
 
 
-function shippingcharges(){
+function shippingcharges()
+{
 
-    $name_courier = $_POST['name_courier'];
+	$name_courier = $_POST['name_courier'];
 	$services = $_POST['services'];
 	$rate = $_POST['rate'];
 	$Length = $_POST['Length'];
@@ -291,27 +355,27 @@ function shippingcharges(){
 	$Weight = $_POST['Weight'];
 	$WeightType = $_POST['WeightType'];
 
-	
+
 	$sql = "INSERT INTO scheduledpickup (name_courier, services, rate, Length, Width, Height, Weight, WeightType)
 			VALUES ('$name_courier', '$services', '$rate', '$Length', '$Width', '$Height', '$Weight', '$WeightType')";
 	dbQuery($sql);
 	echo "<script type=\"text/javascript\">
 						alert(\"$name_courier has been added to the Scheduled Pickup.\");
 						window.location = \"shipping-charge.php\"
-					</script>";	
- 
+					</script>";
 }
 
-function approveCourier(){
+function approveCourier()
+{
 
-   	$cid = (int)$_POST['cid'];
-    $sname = $_POST['sname'];
+	$cid = (int)$_POST['cid'];
+	$sname = $_POST['sname'];
 	$sphone = $_POST['sphone'];
 	$sadd = $_POST['sadd'];
 	$rname = $_POST['rname'];
 	$rphone = $_POST['rphone'];
 	$radd = $_POST['radd'];
-    $weight = $_POST['weight'];
+	$weight = $_POST['weight'];
 	$freight = $_POST['freight'];
 	$Qnty = $_POST['Qnty'];
 	$variable = $_POST['variable'];
@@ -323,266 +387,262 @@ function approveCourier(){
 	$note = $_POST['note'];
 	$status = $_POST['status'];
 	$payment = $_POST['payment'];
-    $fcity = $_POST['fcity'];
+	$fcity = $_POST['fcity'];
 	$tcity = $_POST['tcity'];
-    $date = $_POST['bdate'];
-    $ddate = $_POST['ddate'];
+	$date = $_POST['bdate'];
+	$ddate = $_POST['ddate'];
 	$user = $_POST['user'];
-	
+
 	$sql = "INSERT INTO courier_online (cons_no, ship_name,s_add,s_phone,r_phone,r_add,type,note,time,status,payment,book_mode,rev_name,weight,date,fromcity, tocity , deliverydate,freight, Qnty, variable, 	shipping_subtotal, office, user)
 		VALUES('$no', '$sname','$sadd','$sphone','$rphone','$radd','$type','$note', NOW(),'$status','Pending','$service','$rname','$weight','$date','$fcity','$tcity','$ddate','$freight','$Qnty', 
 		'$variable', '$shipping_subtotal', '$office', '$user')";
 	dbQuery($sql);
-	
+
 	$sql_1 = "UPDATE online_booking SET status='Approved' , tracking='$no' WHERE id='$cid'";
-    dbQuery($sql_1);	 
-	
+	dbQuery($sql_1);
+
 	$result1 =  mysql_query("SELECT * FROM company");
-	while($row = mysql_fetch_array($result1)) {
-	
-	$to  = $row["bemail"];
-	$address  = $row["caddress"];
-	$namecompany  = $row["cname"];
+	while ($row = mysql_fetch_array($result1)) {
 
-    // subject
+		$to  = $row["bemail"];
+		$address  = $row["caddress"];
+		$namecompany  = $row["cname"];
 
-    $subject = 'SHIPPING APPROVED | '.$row["cname"].'';
-	$from = $row["bemail"];
-    // message
-	$text_message    = "Hi ".$sname." this is our address, <br /><br /> <strong> ".$address." Please consider your environmental responsibility. Before printing this e-mail message, ask yourself whether you really need a hard copy.</strong><br /><br /> IMPORTANT:</strong> The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.";			   	
-	
-	// HTML email starts here
-	
-	$message  = "<html><body>";	
-	$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";	
-	$message .= "<tr><td>";	
-	$message .= "<table align='center' width='100%' border='0' cellpadding='0' cellspacing='0' style='max-width:800px; background-color:#fff; font-family:Verdana, Geneva, sans-serif;'>";		
-	$message .= "<thead>
+		// subject
+
+		$subject = 'SHIPPING APPROVED | ' . $row["cname"] . '';
+		$from = $row["bemail"];
+		// message
+		$text_message    = "Hi " . $sname . " this is our address, <br /><br /> <strong> " . $address . " Please consider your environmental responsibility. Before printing this e-mail message, ask yourself whether you really need a hard copy.</strong><br /><br /> IMPORTANT:</strong> The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.";
+
+		// HTML email starts here
+
+		$message  = "<html><body>";
+		$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";
+		$message .= "<tr><td>";
+		$message .= "<table align='center' width='100%' border='0' cellpadding='0' cellspacing='0' style='max-width:800px; background-color:#fff; font-family:Verdana, Geneva, sans-serif;'>";
+		$message .= "<thead>
 				<tr height='80'>
-					<th colspan='4' style='background-color:#f5f5f5; border-bottom:solid 1px #bdbdbd; font-family:Verdana, Geneva, sans-serif; color:#333; font-size:34px;' >".$namecompany."</th>
+					<th colspan='4' style='background-color:#f5f5f5; border-bottom:solid 1px #bdbdbd; font-family:Verdana, Geneva, sans-serif; color:#333; font-size:34px;' >" . $namecompany . "</th>
 				</tr>
 				</thead>";
-		
-	$message .= "<tbody>
+
+		$message .= "<tbody>
 				
 				<tr>
 					<td colspan='4' style='padding:15px;'>
-						<p><img src='".$row['website']."deprixa/image_logo.php?id=1'></p>
+						<p><img src='" . $row['website'] . "deprixa/image_logo.php?id=1'></p>
 						<br><br>
-						<p style='font-size:14px;'>Customer Name: <strong>".$sname."</strong></p>
+						<p style='font-size:14px;'>Customer Name: <strong>" . $sname . "</strong></p>
 						<hr />
 						<p style='font-size:14px;'> Your booking has been approved and ready to ship. Shipping respresentative will be in touch with soon regarding shipping details.</p>
-						<p style='font-size:14px;'>You can start tracking your shipment status with this unique Airwaybill no :<strong> ".$no."</strong></p>											
+						<p style='font-size:14px;'>You can start tracking your shipment status with this unique Airwaybill no :<strong> " . $no . "</strong></p>											
 						<br><br>
-						<p><a style='background:#eee;color:#333;padding:10px;' href='".$row["website"]."login.php' >Customer Login</a></p>
+						<p><a style='background:#eee;color:#333;padding:10px;' href='" . $row["website"] . "login.php' >Customer Login</a></p>
 						<br><br>
-						<p style='font-size:13px; font-family:Verdana, Geneva, sans-serif;'>".$text_message.".</p>
+						<p style='font-size:13px; font-family:Verdana, Geneva, sans-serif;'>" . $text_message . ".</p>
 					</td>
 				</tr>												
-				</tbody>";				
-	$message .= "</table>";	
-	$message .= "</td></tr>";
-	$message .= "</table>";	
-	$message .= "</body></html>";
-
+				</tbody>";
+		$message .= "</table>";
+		$message .= "</td></tr>";
+		$message .= "</table>";
+		$message .= "</body></html>";
 	}
-    // To send HTML mail, the Content-type header must be set
+	// To send HTML mail, the Content-type header must be set
 
-    $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-   // Additional headers
-    $headers .= 'From: '.$from."\r\n";	
-    // this line checks that we have a valid email address
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	// Additional headers
+	$headers .= 'From: ' . $from . "\r\n";
+	// this line checks that we have a valid email address
 	mail($to, $subject, $message, $headers); //This method sends the mail.
 	mail($sadd, $subject, $message, $headers); //This method sends the mail.
-   
-   echo "<script type=\"text/javascript\">
+
+	echo "<script type=\"text/javascript\">
 			alert(\"'$_POST[sname]' Shipping approved satisfactorily.\");
 			window.location = \"online-bookings.php\"
-		</script>";																			
-
-
+		</script>";
 }
 
-function updatecourier() {
-	
-    $sname = $_POST['sname'];
+function updatecourier()
+{
+
+	$sname = $_POST['sname'];
 	$sphone = $_POST['sphone'];
 	$sadd = $_POST['sadd'];
 	$rname = $_POST['rname'];
 	$rphone = $_POST['rphone'];
 	$radd = $_POST['radd'];
-	$no= $_POST['no'];
-    $weight = $_POST['weight'];
+	$no = $_POST['no'];
+	$weight = $_POST['weight'];
 	$freight = $_POST['freight'];
 	$Qnty = $_POST['Qnty'];
 	$variable = $_POST['variable'];
 	$shipping_subtotal = $_POST['shipping_subtotal'];
 	$mode = $_POST['mode'];
 	$type = $_POST['type'];
-    $fcity = $_POST['fcity'];
+	$fcity = $_POST['fcity'];
 	$tcity = $_POST['tcity'];
 	$time = $_POST['btime'];
-    $date = $_POST['bdate'];
-    $ddate = $_POST['ddate'];
+	$date = $_POST['bdate'];
+	$ddate = $_POST['ddate'];
 	$status = $_POST['status'];
 	$user = $_POST['user'];
 	$cid = (int)$_POST['cid'];
-	
-             $sql_1 = "UPDATE courier_online
+
+	$sql_1 = "UPDATE courier_online
                        SET cons_no='$no', ship_name='$sname',s_phone='$sphone',s_add='$sadd', rev_name='$rname',r_phone='$rphone',r_add='$radd',weight='$weight',date='$date',fromcity='$fcity', tocity ='$tcity', deliverydate='$ddate' , time='$time',type='$type',book_mode='$mode',freight='$freight',
 					   Qnty='$Qnty', variable='$variable', shipping_subtotal='$shipping_subtotal', status='$status', user='$user'
                        WHERE cid = '$cid'";
-					   
+
 	$result1 =  mysql_query("SELECT * FROM company");
-	while($row = mysql_fetch_array($result1)) {
-	
-	$to  = $row["bemail"];
-	$address  = $row["caddress"];
-	$namecompany  = $row["cname"];
+	while ($row = mysql_fetch_array($result1)) {
 
-    // subject
+		$to  = $row["bemail"];
+		$address  = $row["caddress"];
+		$namecompany  = $row["cname"];
 
-    $subject = 'SHIPPING ONLINE BOOKING UPDATE | '.$row["cname"].'';
-	$from = $row["bemail"];
-    // message
-	$text_message    = "Hi ".$sname." this is our address, <br /><br /> <strong> ".$address." Please consider your environmental responsibility. Before printing this e-mail message, ask yourself whether you really need a hard copy.</strong><br /><br /> IMPORTANT:</strong> The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.";			   	
-	
-	// HTML email starts here
-	
-	$message  = "<html><body>";	
-	$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";	
-	$message .= "<tr><td>";	
-	$message .= "<table align='center' width='100%' border='0' cellpadding='0' cellspacing='0' style='max-width:800px; background-color:#fff; font-family:Verdana, Geneva, sans-serif;'>";		
-	$message .= "<thead>
+		// subject
+
+		$subject = 'SHIPPING ONLINE BOOKING UPDATE | ' . $row["cname"] . '';
+		$from = $row["bemail"];
+		// message
+		$text_message    = "Hi " . $sname . " this is our address, <br /><br /> <strong> " . $address . " Please consider your environmental responsibility. Before printing this e-mail message, ask yourself whether you really need a hard copy.</strong><br /><br /> IMPORTANT:</strong> The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.";
+
+		// HTML email starts here
+
+		$message  = "<html><body>";
+		$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";
+		$message .= "<tr><td>";
+		$message .= "<table align='center' width='100%' border='0' cellpadding='0' cellspacing='0' style='max-width:800px; background-color:#fff; font-family:Verdana, Geneva, sans-serif;'>";
+		$message .= "<thead>
 				<tr height='80'>
-					<th colspan='4' style='background-color:#f5f5f5; border-bottom:solid 1px #bdbdbd; font-family:Verdana, Geneva, sans-serif; color:#333; font-size:34px;' >".$namecompany."</th>
+					<th colspan='4' style='background-color:#f5f5f5; border-bottom:solid 1px #bdbdbd; font-family:Verdana, Geneva, sans-serif; color:#333; font-size:34px;' >" . $namecompany . "</th>
 				</tr>
 				</thead>";
-		
-	$message .= "<tbody>
+
+		$message .= "<tbody>
 				
 				<tr>
 					<td colspan='4' style='padding:15px;'>
-						<p><img src='".$row['website']."deprixa/image_logo.php?id=1'></p>
+						<p><img src='" . $row['website'] . "deprixa/image_logo.php?id=1'></p>
 						<br><br>
-						<p style='font-size:14px;'>Customer Name: <strong>".$sname."</strong></p>
+						<p style='font-size:14px;'>Customer Name: <strong>" . $sname . "</strong></p>
 						<hr />
-						<p style='font-size:14px;'> Your shipment was updated and following your shipping State is: <strong> ".$status."</strong></p>											
+						<p style='font-size:14px;'> Your shipment was updated and following your shipping State is: <strong> " . $status . "</strong></p>											
 						<br><br>
-						<p><a style='background:#eee;color:#333;padding:10px;' href='".$row["website"]."login.php' >Customer Login</a></p>
+						<p><a style='background:#eee;color:#333;padding:10px;' href='" . $row["website"] . "login.php' >Customer Login</a></p>
 						<br><br>
-						<p style='font-size:13px; font-family:Verdana, Geneva, sans-serif;'>".$text_message.".</p>
+						<p style='font-size:13px; font-family:Verdana, Geneva, sans-serif;'>" . $text_message . ".</p>
 					</td>
 				</tr>												
-				</tbody>";				
-	$message .= "</table>";	
-	$message .= "</td></tr>";
-	$message .= "</table>";	
-	$message .= "</body></html>";
-
+				</tbody>";
+		$message .= "</table>";
+		$message .= "</td></tr>";
+		$message .= "</table>";
+		$message .= "</body></html>";
 	}
-    // To send HTML mail, the Content-type header must be set
+	// To send HTML mail, the Content-type header must be set
 
-    $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-   // Additional headers
-    $headers .= 'From: '.$from."\r\n";	
-    // this line checks that we have a valid email address
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	// Additional headers
+	$headers .= 'From: ' . $from . "\r\n";
+	// this line checks that we have a valid email address
 	mail($to, $subject, $message, $headers); //This method sends the mail.
 	mail($sadd, $subject, $message, $headers); //This method sends the mail.				   
 
-	         dbQuery($sql_1);
-             echo "<script type=\"text/javascript\">
-						alert(\"your shipment was updated and following your shipping State is: <strong> ".$status."</strong>\");
+	dbQuery($sql_1);
+	echo "<script type=\"text/javascript\">
+						alert(\"your shipment was updated and following your shipping State is: <strong> " . $status . "</strong>\");
                         window.location = \"admin.php\"
 					</script>";
 }
 
-function updateBooking(){
-  	    
+function updateBooking()
+{
+
 	$name = $_POST['name'];
 	$cid = (int)$_POST['cid'];
 	$reasons = $_POST['reasons'];
-	 
+
 	$sql_1 = "UPDATE online_booking SET status='Cancelled',reasons='$reasons' WHERE id='$cid'";
-    dbQuery($sql_1);
-	$to  = $_POST['email'];	 
-	
+	dbQuery($sql_1);
+	$to  = $_POST['email'];
+
 	$result1 =  mysql_query("SELECT * FROM company");
-	while($row = mysql_fetch_array($result1)) {
-	
-	$to  = $row["bemail"];
-	$address  = $row["caddress"];
-	$namecompany  = $row["cname"];
+	while ($row = mysql_fetch_array($result1)) {
 
-    // subject
+		$to  = $row["bemail"];
+		$address  = $row["caddress"];
+		$namecompany  = $row["cname"];
 
-    $subject = 'SHIPPING CANCELLED | '.$row["cname"].'';
-	$from = $row["bemail"];
-    // message
-	$text_message    = "Hi ".$name." this is our address, <br /><br /> <strong> ".$address." Please consider your environmental responsibility. Before printing this e-mail message, ask yourself whether you really need a hard copy.</strong><br /><br /> IMPORTANT:</strong> The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.";			   	
-	
-	// HTML email starts here
-	
-	$message  = "<html><body>";	
-	$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";	
-	$message .= "<tr><td>";	
-	$message .= "<table align='center' width='100%' border='0' cellpadding='0' cellspacing='0' style='max-width:800px; background-color:#fff; font-family:Verdana, Geneva, sans-serif;'>";		
-	$message .= "<thead>
+		// subject
+
+		$subject = 'SHIPPING CANCELLED | ' . $row["cname"] . '';
+		$from = $row["bemail"];
+		// message
+		$text_message    = "Hi " . $name . " this is our address, <br /><br /> <strong> " . $address . " Please consider your environmental responsibility. Before printing this e-mail message, ask yourself whether you really need a hard copy.</strong><br /><br /> IMPORTANT:</strong> The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.";
+
+		// HTML email starts here
+
+		$message  = "<html><body>";
+		$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";
+		$message .= "<tr><td>";
+		$message .= "<table align='center' width='100%' border='0' cellpadding='0' cellspacing='0' style='max-width:800px; background-color:#fff; font-family:Verdana, Geneva, sans-serif;'>";
+		$message .= "<thead>
 				<tr height='80'>
-					<th colspan='4' style='background-color:#f5f5f5; border-bottom:solid 1px #bdbdbd; font-family:Verdana, Geneva, sans-serif; color:#333; font-size:34px;' >".$namecompany."</th>
+					<th colspan='4' style='background-color:#f5f5f5; border-bottom:solid 1px #bdbdbd; font-family:Verdana, Geneva, sans-serif; color:#333; font-size:34px;' >" . $namecompany . "</th>
 				</tr>
 				</thead>";
-		
-	$message .= "<tbody>
+
+		$message .= "<tbody>
 				
 				<tr>
 					<td colspan='4' style='padding:15px;'>
-						<p><img src='".$row['website']."deprixa/image_logo.php?id=1'></p>
+						<p><img src='" . $row['website'] . "deprixa/image_logo.php?id=1'></p>
 						<br><br>
-						<p style='font-size:14px;'>Customer Name: <strong>".$name."</strong></p>
+						<p style='font-size:14px;'>Customer Name: <strong>" . $name . "</strong></p>
 						<hr />						
-						<p style='font-size:14px;'>Your booking has been cancelled, due to :<strong> ".$reasons."</strong></p>
-						<p style='font-size:14px;'> Kindly call.<strong> ".$reasons."</strong> for further information.</p>
+						<p style='font-size:14px;'>Your booking has been cancelled, due to :<strong> " . $reasons . "</strong></p>
+						<p style='font-size:14px;'> Kindly call.<strong> " . $reasons . "</strong> for further information.</p>
 						<br><br>
-						<p><a style='background:#eee;color:#333;padding:10px;' href='".$row["website"]."login.php' >Customer Login</a></p>
+						<p><a style='background:#eee;color:#333;padding:10px;' href='" . $row["website"] . "login.php' >Customer Login</a></p>
 						<br><br>
-						<p style='font-size:13px; font-family:Verdana, Geneva, sans-serif;'>".$text_message.".</p>
+						<p style='font-size:13px; font-family:Verdana, Geneva, sans-serif;'>" . $text_message . ".</p>
 					</td>
 				</tr>												
-				</tbody>";				
-	$message .= "</table>";	
-	$message .= "</td></tr>";
-	$message .= "</table>";	
-	$message .= "</body></html>";
-
+				</tbody>";
+		$message .= "</table>";
+		$message .= "</td></tr>";
+		$message .= "</table>";
+		$message .= "</body></html>";
 	}
-    // To send HTML mail, the Content-type header must be set
+	// To send HTML mail, the Content-type header must be set
 
-    $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-   // Additional headers
-    $headers .= 'From: '.$from."\r\n";	
-    // this line checks that we have a valid email address
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	// Additional headers
+	$headers .= 'From: ' . $from . "\r\n";
+	// this line checks that we have a valid email address
 	mail($to, $subject, $message, $headers); //This method sends the mail.
 	mail($email, $subject, $message, $headers); //This method sends the mail.
-   
-   echo "<script type=\"text/javascript\">
+
+	echo "<script type=\"text/javascript\">
 			alert(\"'$_POST[name]' cancelled-online booking.\");
 			window.location = \"online-bookings.php\"
-		</script>";				
-					
-
+		</script>";
 }
 
 
-function updateclient() {
-	
+function updateclient()
+{
+
 	$pwd = $_POST['pwd'];
-    $name = $_POST['user'];
+	$name = $_POST['user'];
 	$email = $_POST['email'];
-	$add= $_POST['add'];
+	$add = $_POST['add'];
 	$phone = $_POST['phone'];
 	$id = $_POST['cid'];
 
@@ -595,15 +655,16 @@ function updateclient() {
 					</script>";
 }
 
-function changeProfile() {
+function changeProfile()
+{
 
 	$pwd = $_POST['password'];
-    $name = $_POST['name'];
+	$name = $_POST['name'];
 	$email = $_POST['email'];
-	$add= $_POST['address'];
+	$add = $_POST['address'];
 	$phone = $_POST['phone'];
 	$id = $_POST['id'];
-	
+
 	$sql_1 = "UPDATE tbl_clients
 				SET name='$name',password = '$pwd' , phone='$phone', email='$email',address='$add' WHERE id= '$id'";
 	dbQuery($sql_1);
@@ -614,84 +675,86 @@ function changeProfile() {
 }
 
 
-function markDelivered() {
+function markDelivered()
+{
 	$cid = (int)$_GET['cid'];
 	$sql = "UPDATE courier SET status = 'Delivered', status_delivered = 'Delivered' WHERE cid= $cid";
 	dbQuery($sql);
-	
+
 	echo "<script type=\"text/javascript\">
 						alert(\"Shipping has changed the State successfully.\");
 						window.location = \"admin.php\"
-					</script>"; 
-	
-			
-}//markDelivered();
+					</script>";
+} //markDelivered();
 
 
-function Deliveredondelivery() {
-	
+function Deliveredondelivery()
+{
+
 	$cid = (int)$_POST['cid'];
 	$dboy = $_POST['deliveryboy'];
 	$rby = $_POST['receivedby'];
 	$drs = $_POST['drs'];
-	
+
 	$sql = "UPDATE courier_online SET status = 'Delivered', deliveryboy='$dboy', receivedby='$rby', drs='$drs' WHERE cid= $cid";
 	dbQuery($sql);
 
 	echo "<script type=\"text/javascript\">
 						alert(\"Their shipping is has delivered successfully.\");
 						window.location = \"admin.php\"
-					</script>"; 
-			
-}//markDeliveredondelivery();
+					</script>";
+} //markDeliveredondelivery();
 
 
 
-function addNewOffice() {
-	
+function addNewOffice()
+{
+
 	$OfficeName = $_POST['OfficeName'];
 	$OfficeAddress = $_POST['OfficeAddress'];
 	$City = $_POST['City'];
 	$PhoneNo = $_POST['PhoneNo'];
 	$OfficeTiming = $_POST['OfficeTiming'];
 	$ContactPerson = $_POST['ContactPerson'];
-	
+
 	$sql = "INSERT INTO offices (off_name, address, city, ph_no, office_time, contact_person)
 			VALUES ('$OfficeName', '$OfficeAddress', '$City', '$PhoneNo', '$OfficeTiming', '$ContactPerson')";
 	dbQuery($sql);
 	header('Location: office-add-success.php');
-}//addNewOffice
+} //addNewOffice
 
-function addNewCustomer() {
-	
+function addNewCustomer()
+{
+
 	$Shippername = $_POST['Shippername'];
 	$Shipperaddress = $_POST['Shipperaddress'];
 	$Shipperphone = $_POST['Shipperphone'];
 	$Shippercc = $_POST['Shippercc'];
-	
+
 	$sql = "INSERT INTO customer (Shippername, Shipperaddress, Shipperphone, Shippercc)
 			VALUES ('$Shippername', '$Shipperaddress', '$Shipperphone', '$Shippercc')";
 	dbQuery($sql);
 	header('Location: customer.php');
-}//addNewCustomer
+} //addNewCustomer
 
-function addManager() {
-	
+function addManager()
+{
+
 	$ManagerName = $_POST['ManagerName'];
 	$Password = $_POST['Password'];
 	$Address = $_POST['Address'];
 	$Email = $_POST['Email'];
 	$PhoneNo = $_POST['PhoneNo'];
 	$OfficeName = $_POST['OfficeName'];
-	
+
 	$sql = "INSERT INTO courier_officers (officer_name, off_pwd, address, email, ph_no, office, reg_date)
 			VALUES ('$ManagerName', '$Password', '$Address', '$Email', '$PhoneNo', '$OfficeName', NOW())";
 	dbQuery($sql);
 	header('Location: manager-add-success.php');
+} //addManager
 
-}//addManager
-
-function addManagers() {
+function addManagers()
+{
 	$customer = $_POST['customer'];
 	$ManagerName = $_POST['ManagerName'];
 	$Password = $_POST['Password'];
@@ -699,16 +762,16 @@ function addManagers() {
 	$Email = $_POST['Email'];
 	$PhoneNo = $_POST['PhoneNo'];
 	$OfficeName = $_POST['OfficeName'];
-	
+
 	$sql = "INSERT INTO courier_customer (id_customer,officer_name, off_pwd, address, email, ph_no, office, reg_date)
 			VALUES ('$customer', $ManagerName', '$Password', '$Address', '$Email', '$PhoneNo', '$OfficeName', NOW())";
 	dbQuery($sql);
 	header('Location: manager-add-success.php');
+} //addManagers
 
-}//addManagers
+function updateStatus()
+{
 
-function updateStatus() {
-	
 	$pick_time = $_POST['pick_time'];
 	$status = $_POST['status'];
 	$comments = $_POST['comments'];
@@ -716,51 +779,51 @@ function updateStatus() {
 	$cons_no = $_POST['cons_no'];
 	$user = $_SESSION['user_name'];
 	//$OfficeName = $_POST['OfficeName'];
-	
+
 	$sql = "INSERT INTO courier_track (cid, cons_no, pick_time, status, comments, bk_time,user)
 			VALUES ($cid, '$cons_no', '$pick_time', '$status', '$comments', NOW(), '$user')";
 	dbQuery($sql);
-	
+
 	$sql_1 = "UPDATE courier SET status='$status', pick_time='$pick_time' WHERE cid = $cid AND cons_no = '$cons_no'";
 	dbQuery($sql_1);
 
 	header("Location: edit-courier.php?cid=$cid");
+} //updateStatus
 
-}//updateStatus
+function updatePaid()
+{
 
-function updatePaid() {
-	
 	$book_mode = $_POST['book_mode'];
 	$on_delivery = $_POST['on_delivery'];
 	$cid = (int)$_POST['cid'];
 	$cons_no = $_POST['cons_no'];
-	
+
 	$sql = "INSERT INTO courier_paid (cid, cons_no, book_mode, on_delivery, date)
 			VALUES ($cid, '$cons_no', '$book_mode', '$on_delivery', NOW())";
 	dbQuery($sql);
-	
+
 	$sql_1 = "UPDATE courier SET book_mode = '$book_mode' WHERE cid = $cid AND cons_no = '$cons_no'";
 	dbQuery($sql_1);
 
 	header('Location: admin-on-delivery.php');
+} //updatePaid
 
-}//updatePaid
-
-function changePass() {
+function changePass()
+{
 
 	$pwd = $_POST['pwd'];
 	$cid = $_POST['cid'];
 
 	$sql_1 = "UPDATE manager_user SET pwd = '$pwd'	WHERE cid= '$cid'";
-		dbQuery($sql_1);
+	dbQuery($sql_1);
 
 	echo "<script type=\"text/javascript\">
 				alert(\"Changes applied successfuly\");
 				window.location = \"preferences_user.php\"
 		  </script>";
-
 }
-function changeCompany() {
+function changeCompany()
+{
 
 	$cname = $_POST['cname'];
 	$cemail = $_POST['cemail'];
@@ -782,24 +845,21 @@ function changeCompany() {
 	echo "<script type=\"text/javascript\">
 			alert(\"Changes applied successfuly\");
 			window.location = \"preferences.php\"
-		</script>";		
-	
-
+		</script>";
 }
 
 
-function logOut(){
-	if(isset($_SESSION['user_name'])){
+function logOut()
+{
+	if (isset($_SESSION['user_name'])) {
 		unset($_SESSION['user_name']);
 	}
-	if(isset($_SESSION['user_type'])){
+	if (isset($_SESSION['user_type'])) {
 		unset($_SESSION['user_type']);
 	}
-	if(isset($_SESSION['user_customer'])){
+	if (isset($_SESSION['user_customer'])) {
 		unset($_SESSION['user_customer']);
 	}
 	session_destroy();
 	header('Location: ../index.php');
 }//logOut
-
-?>
