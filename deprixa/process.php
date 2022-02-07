@@ -153,8 +153,8 @@ function addCons(){
 	$officename = $_POST['officename'];
 	$user = $_POST['user'];	
 
-	$sql = "INSERT INTO courier (cons_no, ship_name, phone, s_add, cc, rev_name, r_phone, r_add, cc_r, email, type, weight, variable, shipping_subtotal, invice_no, qty, book_mode, freight, declarate, mode, pick_date, schedule, pick_time, status, comments, officename, user, book_date)
-			VALUES('$ConsignmentNo', '$Shippername','$Shipperphone', '$Shipperaddress', '$Shippercc', '$Receivername','$Receiverphone','$Receiveraddress', '$Receivercc_r', '$Receiveremail', '$Shiptype',$Weight , '$variable', '$shipping_subtotal', '$Invoiceno', $Qnty, '$Bookingmode', '$Totalfreight',  '$Totaldeclarate', '$Mode', '$Packupdate', '$Schedule', '$Pickuptime', '$status', '$Comments', '$officename', '$user', curdate())";	
+	$sql = "INSERT INTO courier (cons_no, ship_name, phone, s_add, cc, rev_name, r_phone, r_add, cc_r, email, type, weight, variable, shipping_subtotal, invice_no, qty, book_mode, freight, declarate, mode, pick_date, schedule, pick_time, status, comments,book_date,status_delivered, officename, user)
+			VALUES('$ConsignmentNo', '$Shippername','$Shipperphone', '$Shipperaddress', '$Shippercc', '$Receivername','$Receiverphone','$Receiveraddress', '$Receivercc_r', '$Receiveremail', '$Shiptype',$Weight , '$variable', '$shipping_subtotal', '$Invoiceno', $Qnty, '$Bookingmode', '$Totalfreight',  '$Totaldeclarate', '$Mode', '$Packupdate', '$Schedule', '$Pickuptime', '$status', '$Comments', curdate(),'OTW', '$officename', '$user')";	
 		//echo $sql;
 	dbQuery($sql);
 					
@@ -714,10 +714,11 @@ function updateStatus() {
 	$comments = $_POST['comments'];
 	$cid = (int)$_POST['cid'];
 	$cons_no = $_POST['cons_no'];
+	$user = $_SESSION['user_name'];
 	//$OfficeName = $_POST['OfficeName'];
 	
-	$sql = "INSERT INTO courier_track (cid, cons_no, pick_time, status, comments, bk_time)
-			VALUES ($cid, '$cons_no', '$pick_time', '$status', '$comments', NOW())";
+	$sql = "INSERT INTO courier_track (cid, cons_no, pick_time, status, comments, bk_time,user)
+			VALUES ($cid, '$cons_no', '$pick_time', '$status', '$comments', NOW(), '$user')";
 	dbQuery($sql);
 	
 	$sql_1 = "UPDATE courier SET status='$status', pick_time='$pick_time' WHERE cid = $cid AND cons_no = '$cons_no'";
